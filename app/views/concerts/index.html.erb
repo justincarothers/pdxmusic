@@ -1,1 +1,8 @@
-<h1> TEST! </h1>
+
+<% @concerts.each do |concert| %>
+	<h2><%= link_to concert.band, concert_path(concert) %></h2>
+	<p><%= concert.title %></p>
+<% end %>
+
+<%= link_to "Add Concert", new_concert_path %>
+

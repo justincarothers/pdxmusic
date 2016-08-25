@@ -1,6 +1,13 @@
 class ConcertsController < ApplicationController
 
+	before_action :find_concert, only: [:show, :edit, :update, :destroy]
+
 	def index
+		@concerts = Concert.all.order("created_at DESC")
+	end
+
+	def show
+		
 	end
 
 	def new
@@ -9,6 +16,12 @@ class ConcertsController < ApplicationController
 
 	def create
 		@concert = Concert.new(params.require(:concert).permit(:title, :description, :band))
+
+		if @concert.save
+			redirect_to root_path
+		else
+			render 'new'
+		end
 	end
 
 
@@ -16,6 +29,10 @@ class ConcertsController < ApplicationController
 
 	def concert_params
 		params.require(:concert).permit(:title, :description, :director)
+	end
+
+	def find_concert
+		@concert = Concert.find(params[:id])
 	end
 
 
