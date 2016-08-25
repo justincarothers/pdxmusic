@@ -24,6 +24,20 @@ class ConcertsController < ApplicationController
 		end
 	end
 
+	def edit
+	end
+
+	def update
+		if @concert.update(concert_params)
+			redirect_to concert_path(@concert)
+		else
+			render 'edit'
+		end
+	end
+
+	def destroy
+	end
+
 
 	private 
 
